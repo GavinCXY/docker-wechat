@@ -3,7 +3,7 @@ FROM ricwang/docker-wechat:base
 RUN curl -O "https://ime-sec.gtimg.com/202412171722/80a128d4dd53b8762fe2492392764028/pc/dl/gzindex/1680521603/sogoupinyin_4.2.1.145_amd64.deb"
 
 RUN apt update && \
-    apt install -y fcitx qtbase5-dev libqt5qml5 libqt5quick5 libqt5quickwidgets5 qml-module-qtquick2 lsb-release whiptail && \
+    apt install -y fcitx qtbase5-dev libqt5qml5 libqt5quick5 libqt5quickwidgets5 qml-module-qtquick2 lsb-release whiptail libgsettings-qt1 && \
     # 清理工作
     apt clean && \
     rm -rf /var/lib/apt/lists/*
