@@ -1,6 +1,11 @@
 FROM ricwang/docker-wechat:base
 
-RUN curl -O "https://ime-sec.gtimg.com/202412171722/80a128d4dd53b8762fe2492392764028/pc/dl/gzindex/1680521603/sogoupinyin_4.2.1.145_amd64.deb"
+ENV GTK_IM_MODULE=fcitx
+ENV QT_IM_MODULE=fcitx
+ENV XMODIFIERS=@im=fcitx
+ENV LANG=zh_CN.UTF-8
+
+RUN curl -O "https://ime-sec.gtimg.com/202412181543/39bcbc7f429a9e8c5a05f59b93770b53/pc/dl/gzindex/1680521603/sogoupinyin_4.2.1.145_amd64.deb"
 
 RUN apt update && \
     apt install -y fcitx qtbase5-dev libqt5qml5 libqt5quick5 libqt5quickwidgets5 qml-module-qtquick2 lsb-release whiptail libgsettings-qt1 && \
@@ -19,6 +24,7 @@ RUN echo '#!/bin/sh' > /startapp.sh && \
     echo 'exec /usr/bin/wechat' >> /startapp.sh && \
     chmod +x /startapp.sh
 
+RUN cp /usr/share/applications/fcitx.desktop /etc/xdg/autostart/
 VOLUME /root/.xwechat
 VOLUME /root/xwechat_files
 VOLUME /root/downloads
